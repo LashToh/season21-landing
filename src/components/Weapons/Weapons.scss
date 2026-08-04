@@ -1,0 +1,152 @@
+@use '../../styles/variables' as *;
+
+.weapons {
+  @include section-padding;
+  background: $color-bg-deep;
+  position: relative;
+
+  &__inner {
+    @include container;
+  }
+
+  &__grid {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+  }
+
+  &__card {
+    position: relative;
+    transition: transform 0.15s ease;
+    transform-style: preserve-3d;
+    will-change: transform;
+
+    &--left .weapons__card-inner {
+      flex-direction: row;
+
+      @media (max-width: $breakpoint-tablet) {
+        flex-direction: column;
+      }
+    }
+
+    &--right .weapons__card-inner {
+      flex-direction: row-reverse;
+
+      @media (max-width: $breakpoint-tablet) {
+        flex-direction: column;
+      }
+    }
+  }
+
+  &__card-glow {
+    position: absolute;
+    inset: -2px;
+    border-radius: $radius-lg;
+    background: linear-gradient(135deg, rgba(198, 23, 23, 0.3), transparent, rgba(240, 208, 138, 0.15));
+    opacity: 0;
+    transition: opacity $transition-base;
+    z-index: 0;
+  }
+
+  &__card:hover &__card-glow {
+    opacity: 1;
+  }
+
+  &__card-inner {
+    @include glass-panel;
+    border-radius: $radius-lg;
+    display: flex;
+    align-items: center;
+    gap: $spacing-lg;
+    padding: $spacing-lg;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+
+    @media (max-width: $breakpoint-tablet) {
+      padding: $spacing-md;
+      gap: $spacing-md;
+    }
+  }
+
+  &__card-visual {
+    flex: 0 0 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    @media (max-width: $breakpoint-tablet) {
+      flex: none;
+      width: 100%;
+      max-width: 250px;
+      margin: 0 auto;
+    }
+
+    img {
+      width: 100%;
+      max-width: 220px;
+      filter: drop-shadow(0 0 30px rgba(198, 23, 23, 0.3));
+      transition: transform $transition-base;
+    }
+  }
+
+  &__card:hover &__card-visual img {
+    transform: scale(1.08) rotate(-3deg);
+  }
+
+  &__card-content {
+    flex: 1;
+  }
+
+  &__card-subtitle {
+    font-family: $font-display;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: $color-red-bright;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  &__card-title {
+    font-family: $font-display;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 700;
+    @include gold-text-gradient;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__card-desc {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: $spacing-md;
+  }
+
+  &__card-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    li {
+      font-family: $font-display;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.9rem;
+      border: 1px solid rgba(198, 23, 23, 0.3);
+      border-radius: $radius-sm;
+      color: rgba(255, 255, 255, 0.7);
+      background: rgba(198, 23, 23, 0.08);
+      transition: all $transition-fast;
+
+      &:hover {
+        border-color: $color-red-bright;
+        color: $color-gold;
+      }
+    }
+  }
+}
