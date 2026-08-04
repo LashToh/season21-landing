@@ -1,0 +1,161 @@
+@use '../../styles/variables' as *;
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-navbar;
+  padding: 1.25rem 0;
+  transition: all $transition-base;
+
+  &--scrolled {
+    padding: 0.75rem 0;
+    background: rgba(9, 9, 9, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(198, 23, 23, 0.15);
+  }
+
+  &__inner {
+    @include container;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-md;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    z-index: 10;
+  }
+
+  &__logo-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    font-family: $font-display;
+    font-weight: 900;
+    font-size: 0.9rem;
+    color: $color-gold;
+    border: 2px solid $color-red-bright;
+    background: linear-gradient(135deg, $color-bg-crimson, $color-bg-dark);
+    box-shadow: $glow-red;
+  }
+
+  &__logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+
+  &__logo-season {
+    font-family: $font-display;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: $color-red-bright;
+  }
+
+  &__logo-sub {
+    font-family: $font-display;
+    font-size: 1rem;
+    font-weight: 700;
+    color: $color-gold;
+  }
+
+  &__links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    @media (max-width: $breakpoint-tablet) {
+      display: none;
+    }
+
+    a {
+      font-family: $font-display;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+      transition: color $transition-fast;
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: $color-red-bright;
+        transition: width $transition-base;
+      }
+
+      &:hover {
+        color: $color-gold;
+
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  &__cta {
+    @media (max-width: $breakpoint-tablet) {
+      display: none;
+    }
+  }
+
+  &__toggle {
+    display: none;
+    font-size: 1.75rem;
+    color: $color-gold;
+    z-index: 10;
+
+    @media (max-width: $breakpoint-tablet) {
+      display: flex;
+    }
+  }
+
+  &__mobile {
+    position: fixed;
+    inset: 0;
+    background: rgba(9, 9, 9, 0.97);
+    backdrop-filter: blur(30px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-lg;
+    z-index: 5;
+  }
+
+  &__mobile-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+
+    a {
+      font-family: $font-display;
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.85);
+      transition: color $transition-fast;
+
+      &:hover {
+        color: $color-gold;
+      }
+    }
+  }
+}
