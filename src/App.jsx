@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
 import { useLenis } from './hooks/useLenis';
 
 const Crusader = lazy(() => import('./components/Crusader'));
@@ -20,7 +21,7 @@ export default function App() {
   useLenis();
 
   return (
-    <>
+    <ErrorBoundary>
       <Navbar />
       <main>
         <Hero />
@@ -37,6 +38,6 @@ export default function App() {
       <Suspense fallback={null}>
         <Footer />
       </Suspense>
-    </>
+    </ErrorBoundary>
   );
 }
