@@ -90,7 +90,7 @@
     padding: 1.75rem !important;
   }
 
-  &__date {
+  &__label {
     font-family: $font-display;
     font-size: 0.7rem;
     font-weight: 600;
@@ -99,6 +99,10 @@
     color: $color-red-bright;
     display: block;
     margin-bottom: 0.5rem;
+
+    &--tba {
+      color: rgba(255, 255, 255, 0.45);
+    }
   }
 
   &__title {

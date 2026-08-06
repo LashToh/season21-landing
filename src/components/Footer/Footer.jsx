@@ -1,77 +1,158 @@
 import { FaDiscord, FaTwitter, FaYoutube, FaFacebookF } from 'react-icons/fa';
+
+import LanguageSwitcher from '../LanguageSwitcher';
+
+import { useTranslation } from '../../context/LanguageContext';
+
 import './Footer.scss';
 
+
+
 const SOCIAL = [
-  { icon: FaDiscord, label: 'Discord', href: '#' },
-  { icon: FaTwitter, label: 'Twitter', href: '#' },
-  { icon: FaYoutube, label: 'YouTube', href: '#' },
-  { icon: FaFacebookF, label: 'Facebook', href: '#' },
+
+  { icon: FaDiscord, key: 'discord', href: '#' },
+
+  { icon: FaTwitter, key: 'twitter', href: '#' },
+
+  { icon: FaYoutube, key: 'youtube', href: '#' },
+
+  { icon: FaFacebookF, key: 'facebook', href: '#' },
+
 ];
 
-const FOOTER_LINKS = [
-  {
-    title: 'Game',
-    links: ['Download', 'Register', 'Rankings', 'Support'],
-  },
-  {
-    title: 'Community',
-    links: ['Forums', 'Discord', 'Events', 'Fan Art'],
-  },
-  {
-    title: 'Legal',
-    links: ['Terms of Service', 'Privacy Policy', 'Cookie Policy'],
-  },
-];
+
+
+const FOOTER_GROUPS = ['game', 'community', 'legal'];
+
+
 
 export default function Footer() {
+
+  const { t } = useTranslation();
+
+
+
   return (
+
     <footer className="footer">
+
       <div className="footer__inner">
+
         <div className="footer__top">
+
           <div className="footer__brand">
-            <div className="footer__logo">
-              <span className="footer__logo-mark">MU</span>
-              <div>
-                <span className="footer__logo-season">Season 21</span>
-                <span className="footer__logo-name">Crusader</span>
+
+            <div className="footer__logo-row">
+
+              <div className="footer__logo">
+
+                <picture>
+
+                  <source srcSet="/assets/logo-mubreda.webp" type="image/webp" />
+
+                  <img
+
+                    src="/assets/logo-mubreda.png"
+
+                    alt={t('common.logoAlt')}
+
+                    className="footer__logo-img"
+
+                    width={240}
+
+                    height={240}
+
+                    loading="lazy"
+
+                    decoding="async"
+
+                  />
+
+                </picture>
+
               </div>
+
+              <p className="footer__brand-name">{t('footer.brandName')}</p>
+
             </div>
-            <p className="footer__tagline">
-              A fan-made promotional landing page for MU Online Season 21.
-              Not affiliated with Webzen Inc.
-            </p>
+
+            <p className="footer__tagline">{t('footer.tagline')}</p>
+
             <div className="footer__social">
-              {SOCIAL.map(({ icon: Icon, label, href }) => (
-                <a key={label} href={href} aria-label={label} className="footer__social-link">
+
+              {SOCIAL.map(({ icon: Icon, key, href }) => (
+
+                <a key={key} href={href} aria-label={t(`footer.social.${key}`)} className="footer__social-link">
+
                   <Icon />
+
                 </a>
+
               ))}
+
             </div>
+
           </div>
+
+
 
           <div className="footer__links">
-            {FOOTER_LINKS.map((group) => (
-              <div key={group.title} className="footer__link-group">
-                <h4>{group.title}</h4>
-                <ul>
-                  {group.links.map((link) => (
-                    <li key={link}>
-                      <a href="#">{link}</a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+
+            {FOOTER_GROUPS.map((groupKey) => {
+
+              const group = t(`footer.groups.${groupKey}`);
+
+              return (
+
+                <div key={groupKey} className="footer__link-group">
+
+                  <h4>{group.title}</h4>
+
+                  <ul>
+
+                    {group.links.map((link) => (
+
+                      <li key={link}>
+
+                        <a href="#">{link}</a>
+
+                      </li>
+
+                    ))}
+
+                  </ul>
+
+                </div>
+
+              );
+
+            })}
+
           </div>
+
         </div>
 
+
+
         <div className="footer__bottom">
-          <p>&copy; 2026 LashToh. All rights reserved.</p>
-          <p className="footer__disclaimer">
-            MU Online is a registered trademark of Webzen Inc.
-          </p>
+
+          <div className="footer__bottom-row">
+
+            <p>{t('footer.copyright')}</p>
+
+            <LanguageSwitcher compact className="footer__lang" />
+
+          </div>
+
+          <p className="footer__disclaimer">{t('footer.disclaimer')}</p>
+
         </div>
+
       </div>
+
     </footer>
+
   );
+
 }
+

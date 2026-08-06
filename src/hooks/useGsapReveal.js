@@ -54,16 +54,22 @@ export function useGsapHero(ref) {
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
     tl.fromTo(
-      el.querySelector('.hero__label'),
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.8 },
-      0.3
+      el.querySelector('.hero__brand'),
+      { opacity: 0, y: 40 },
+      { opacity: 1, y: 0, duration: 0.9 },
+      0.2
     )
       .fromTo(
-        el.querySelector('.hero__title-line'),
-        { opacity: 0, y: 80 },
-        { opacity: 1, y: 0, duration: 1, stagger: 0.15 },
-        0.5
+        el.querySelector('.hero__beta'),
+        { opacity: 0, y: 24, scale: 0.92 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.7 },
+        0.45
+      )
+      .fromTo(
+        el.querySelectorAll('.hero__title-line'),
+        { opacity: 0, y: 60 },
+        { opacity: 1, y: 0, duration: 0.9, stagger: 0.12 },
+        0.55
       )
       .fromTo(
         el.querySelector('.hero__subtitle'),
@@ -76,12 +82,6 @@ export function useGsapHero(ref) {
         { opacity: 0, y: 30 },
         { opacity: 1, y: 0, duration: 0.8 },
         1.2
-      )
-      .fromTo(
-        el.querySelector('.hero__character'),
-        { opacity: 0, x: 100, scale: 0.95 },
-        { opacity: 1, x: 0, scale: 1, duration: 1.4 },
-        0.6
       );
 
     return () => tl.kill();
