@@ -57,6 +57,24 @@
     display: flex;
     align-items: center;
     flex-shrink: 0;
+    border-radius: 0.25rem;
+    transition: transform $transition-base, filter $transition-base;
+
+    &:hover {
+      transform: scale(1.04);
+
+      .navbar__logo-img {
+        filter:
+          drop-shadow(0 2px 8px rgba(0, 0, 0, 0.35))
+          drop-shadow(0 0 18px rgba(240, 208, 138, 0.35))
+          drop-shadow(0 0 28px rgba(198, 23, 23, 0.22))
+          brightness(1.08);
+      }
+    }
+
+    &:active {
+      transform: scale(1.01);
+    }
   }
 
   &__logo-img {
@@ -66,7 +84,7 @@
     object-fit: contain;
     background: transparent;
     filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.35));
-    transition: height $transition-base;
+    transition: height $transition-base, filter $transition-base;
 
     @media (max-width: $breakpoint-tablet) {
       height: 8.75rem;
@@ -80,7 +98,7 @@
   &__links {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1.75rem;
 
     @media (max-width: $breakpoint-tablet) {
       display: none;
@@ -88,27 +106,31 @@
 
     a {
       font-family: $font-display;
-      font-size: 0.6875rem;
+      font-size: 0.9375rem;
       font-weight: 600;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.7);
-      transition: color $transition-fast;
+      color: rgba(245, 230, 200, 0.82);
+      text-decoration: none;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55);
+      transition: color $transition-fast, text-shadow $transition-fast;
       position: relative;
+      padding: 0.2rem 0;
 
       &::after {
         content: '';
         position: absolute;
-        bottom: -4px;
+        bottom: -6px;
         left: 0;
         width: 0;
-        height: 1px;
-        background: $color-red-bright;
+        height: 2px;
+        background: linear-gradient(90deg, $color-gold, #fff5dc);
+        box-shadow: 0 0 10px rgba(240, 208, 138, 0.45);
         transition: width $transition-base;
       }
 
       &:hover {
-        color: $color-gold;
+        color: #fff8e7;
 
         &::after {
           width: 100%;
@@ -185,11 +207,12 @@
       font-weight: 600;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.85);
+      color: rgba(245, 230, 200, 0.88);
+      text-decoration: none;
       transition: color $transition-fast;
 
       &:hover {
-        color: $color-gold;
+        color: #fff8e7;
       }
     }
   }
