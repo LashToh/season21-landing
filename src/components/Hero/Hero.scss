@@ -12,21 +12,66 @@
     inset: -10%;
     z-index: 0;
     will-change: transform;
+    background-image: url('/assets/bg-header.png');
+    background-size: cover;
+    background-position: right center;
+    background-repeat: no-repeat;
+
+    @media (max-width: $breakpoint-tablet) {
+      background-position: 85% center;
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      background-position: 90% center;
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      background-position: 95% center;
+    }
   }
 
   &__bg-gradient {
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(109, 0, 0, 0.35) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 80% at 20% 80%, rgba(27, 0, 0, 0.6) 0%, transparent 50%),
-      linear-gradient(180deg, $color-bg-deep 0%, $color-bg-crimson 40%, $color-bg-deep 100%);
+      linear-gradient(
+        90deg,
+        rgba(9, 9, 9, 0.92) 0%,
+        rgba(9, 9, 9, 0.75) 30%,
+        rgba(27, 0, 0, 0.45) 50%,
+        transparent 72%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(9, 9, 9, 0.55) 0%,
+        transparent 25%,
+        transparent 75%,
+        rgba(9, 9, 9, 0.75) 100%
+      );
+
+    @media (max-width: $breakpoint-mobile) {
+      background:
+        linear-gradient(
+          90deg,
+          rgba(9, 9, 9, 0.95) 0%,
+          rgba(9, 9, 9, 0.85) 45%,
+          rgba(27, 0, 0, 0.55) 65%,
+          transparent 85%
+        ),
+        linear-gradient(
+          180deg,
+          rgba(9, 9, 9, 0.65) 0%,
+          transparent 25%,
+          transparent 75%,
+          rgba(9, 9, 9, 0.8) 100%
+        );
+    }
   }
 
   &__bg-vignette {
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at center, transparent 40%, rgba(9, 9, 9, 0.8) 100%);
+    background: radial-gradient(ellipse at center, transparent 50%, rgba(9, 9, 9, 0.55) 100%);
   }
 
   &__fog {
@@ -34,8 +79,9 @@
     width: 200%;
     height: 100%;
     background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.008' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E") repeat-x;
-    opacity: 0.4;
+    opacity: 0.2;
     animation: fogDrift 30s linear infinite;
+    pointer-events: none;
 
     &--1 {
       bottom: 10%;
@@ -44,7 +90,7 @@
 
     &--2 {
       bottom: 30%;
-      opacity: 0.25;
+      opacity: 0.12;
       animation-duration: 55s;
       animation-direction: reverse;
     }
@@ -54,33 +100,94 @@
     @include container;
     position: relative;
     z-index: 3;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
     align-items: center;
-    gap: $spacing-lg;
-    padding-top: 6rem;
+    justify-content: flex-start;
+    padding-top: 18rem;
     padding-bottom: 4rem;
     min-height: 100vh;
 
     @media (max-width: $breakpoint-tablet) {
-      grid-template-columns: 1fr;
+      justify-content: center;
       text-align: center;
-      padding-top: 8rem;
+      padding-top: 11rem;
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      padding-top: 10rem;
     }
   }
 
   &__text {
-    max-width: 600px;
+    max-width: 680px;
 
     @media (max-width: $breakpoint-tablet) {
       max-width: 100%;
       margin: 0 auto;
     }
+
+    @media (max-width: $breakpoint-mobile) {
+      max-width: 92%;
+    }
   }
 
-  &__label {
-    display: block;
+  &__brand-block {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem 1.25rem;
     margin-bottom: $spacing-sm;
+
+    @media (max-width: $breakpoint-tablet) {
+      justify-content: center;
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+  }
+
+  &__brand {
+    margin: 0;
+    font-family: $font-display;
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    @include gold-text-gradient;
+    filter: drop-shadow(0 2px 24px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 60px rgba(240, 208, 138, 0.2));
+
+    @media (max-width: $breakpoint-mobile) {
+      font-size: clamp(2.25rem, 10vw, 3.5rem);
+      letter-spacing: 0.05em;
+    }
+  }
+
+  &__beta {
+    font-family: $font-display;
+    font-size: clamp(1rem, 2.4vw, 1.375rem);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(240, 208, 138, 0.95);
+    padding: 0.7rem 1.4rem;
+    border-radius: 999px;
+    background: rgba(18, 18, 18, 0.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(198, 23, 23, 0.45);
+    box-shadow: 0 0 24px rgba(198, 23, 23, 0.25);
+    line-height: 1;
+    white-space: nowrap;
+
+    @media (max-width: $breakpoint-mobile) {
+      font-size: clamp(0.9375rem, 3.8vw, 1.125rem);
+      letter-spacing: 0.12em;
+      padding: 0.6rem 1.15rem;
+    }
   }
 
   &__title {
@@ -92,26 +199,35 @@
 
   &__title-line {
     font-family: $font-display;
-    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-size: clamp(2rem, 5vw, 3.75rem);
     font-weight: 900;
     line-height: 1.05;
     letter-spacing: 0.02em;
     color: rgba(255, 255, 255, 0.95);
-    text-shadow: 0 0 80px rgba(198, 23, 23, 0.3);
+    text-shadow: 0 2px 24px rgba(0, 0, 0, 0.6), 0 0 80px rgba(198, 23, 23, 0.3);
+
+    @media (max-width: $breakpoint-mobile) {
+      font-size: clamp(1.75rem, 8vw, 2.75rem);
+    }
 
     &--accent {
       @include gold-text-gradient;
-      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-size: clamp(1.75rem, 4vw, 3rem);
       font-weight: 700;
+
+      @media (max-width: $breakpoint-mobile) {
+        font-size: clamp(1.5rem, 6.5vw, 2.25rem);
+      }
     }
   }
 
   &__subtitle {
     font-size: clamp(1.05rem, 2vw, 1.25rem);
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.75);
     line-height: 1.8;
     margin-bottom: $spacing-lg;
     max-width: 480px;
+    text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
 
     @media (max-width: $breakpoint-tablet) {
       margin-left: auto;
@@ -127,49 +243,6 @@
     @media (max-width: $breakpoint-tablet) {
       justify-content: center;
     }
-  }
-
-  &__character {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    will-change: transform;
-
-    @media (max-width: $breakpoint-tablet) {
-      order: -1;
-      max-height: 50vh;
-    }
-  }
-
-  &__character-glow {
-    position: absolute;
-    width: 70%;
-    height: 70%;
-    background: radial-gradient(circle, rgba(198, 23, 23, 0.35) 0%, transparent 70%);
-    filter: blur(40px);
-    animation: pulseGlow 4s ease-in-out infinite;
-  }
-
-  &__character-img {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    max-width: 550px;
-    filter: drop-shadow(0 0 60px rgba(198, 23, 23, 0.4));
-    animation: floatCharacter 6s ease-in-out infinite;
-  }
-
-  &__character-smoke {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    height: 120px;
-    background: linear-gradient(to top, rgba(198, 23, 23, 0.15), transparent);
-    filter: blur(20px);
-    animation: smokeRise 5s ease-in-out infinite;
   }
 
   &__scroll {
@@ -203,21 +276,6 @@
 @keyframes fogDrift {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
-}
-
-@keyframes pulseGlow {
-  0%, 100% { opacity: 0.6; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.1); }
-}
-
-@keyframes floatCharacter {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
-}
-
-@keyframes smokeRise {
-  0%, 100% { opacity: 0.4; transform: translateX(-50%) scaleY(1); }
-  50% { opacity: 0.7; transform: translateX(-50%) scaleY(1.2); }
 }
 
 @keyframes fadeScroll {

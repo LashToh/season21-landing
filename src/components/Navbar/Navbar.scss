@@ -7,6 +7,7 @@
   right: 0;
   z-index: $z-navbar;
   padding: 1.25rem 0;
+  overflow: visible;
   transition: all $transition-base;
 
   &--scrolled {
@@ -14,6 +15,18 @@
     background: rgba(9, 9, 9, 0.85);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(198, 23, 23, 0.15);
+
+    .navbar__logo-img {
+      height: 9rem;
+
+      @media (max-width: $breakpoint-tablet) {
+        height: 6.5rem;
+      }
+
+      @media (max-width: $breakpoint-mobile) {
+        height: 5.5rem;
+      }
+    }
   }
 
   &__inner {
@@ -22,50 +35,46 @@
     align-items: center;
     justify-content: space-between;
     gap: $spacing-md;
+    min-height: 14rem;
+
+    @media (max-width: $breakpoint-tablet) {
+      min-height: 8.75rem;
+    }
+
+    @media (max-width: $breakpoint-mobile) {
+      min-height: 8.75rem;
+    }
+  }
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    z-index: 10;
+    flex-shrink: 0;
   }
 
   &__logo {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    z-index: 10;
+    flex-shrink: 0;
   }
 
-  &__logo-mark {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.75rem;
-    height: 2.75rem;
-    font-family: $font-display;
-    font-weight: 900;
-    font-size: 0.9rem;
-    color: $color-gold;
-    border: 2px solid $color-red-bright;
-    background: linear-gradient(135deg, $color-bg-crimson, $color-bg-dark);
-    box-shadow: $glow-red;
-  }
+  &__logo-img {
+    display: block;
+    height: 14rem;
+    width: auto;
+    object-fit: contain;
+    background: transparent;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.35));
+    transition: height $transition-base;
 
-  &__logo-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.2;
-  }
+    @media (max-width: $breakpoint-tablet) {
+      height: 8.75rem;
+    }
 
-  &__logo-season {
-    font-family: $font-display;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: $color-red-bright;
-  }
-
-  &__logo-sub {
-    font-family: $font-display;
-    font-size: 1rem;
-    font-weight: 700;
-    color: $color-gold;
+    @media (max-width: $breakpoint-mobile) {
+      height: 8.75rem;
+    }
   }
 
   &__links {
@@ -79,7 +88,7 @@
 
     a {
       font-family: $font-display;
-      font-size: 0.75rem;
+      font-size: 0.6875rem;
       font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -108,7 +117,29 @@
     }
   }
 
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    @media (max-width: $breakpoint-tablet) {
+      display: none;
+    }
+  }
+
+  &__mobile-lang {
+    margin-bottom: 0.5rem;
+  }
+
+  &__register {
+    padding: 0.65rem 1rem;
+    font-size: 0.6875rem;
+  }
+
   &__cta {
+    white-space: nowrap;
+    flex-shrink: 0;
+
     @media (max-width: $breakpoint-tablet) {
       display: none;
     }
@@ -136,6 +167,10 @@
     justify-content: center;
     gap: $spacing-lg;
     z-index: 5;
+
+    .btn--primary {
+      white-space: nowrap;
+    }
   }
 
   &__mobile-links {
