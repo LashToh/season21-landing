@@ -14,6 +14,23 @@ export const LOCALE_LABELS = {
   pt: 'PT',
 };
 
+/** Map browser language tags (Chrome, etc.) to supported locales. */
+export function localeFromBrowserLanguage() {
+  if (typeof navigator === 'undefined') return DEFAULT_LOCALE;
+
+  const candidates = [
+    ...(navigator.languages ?? []),
+    navigator.language,
+  ].filter(Boolean);
+
+  for (const tag of candidates) {
+    const code = String(tag).toLowerCase().split('-')[0];
+    if (LOCALES.includes(code)) return code;
+  }
+
+  return DEFAULT_LOCALE;
+}
+
 function getNested(obj, path) {
   return path.split('.').reduce((acc, key) => (acc != null ? acc[key] : undefined), obj);
 }
